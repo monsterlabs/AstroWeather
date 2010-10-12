@@ -15,6 +15,7 @@
 
 @synthesize delegate;
 @synthesize placesPicker;
+@synthesize deleteButton, editButton;
 @synthesize places;
 
 
@@ -37,8 +38,11 @@
     }
     [self setPlaces:mutableFetchResults];
     int selected = [[NSUserDefaults standardUserDefaults] integerForKey:@"Selected"];
-    if (selected >= 0) {
+    if (selected >= 0 && [places count] > selected) {
         [placesPicker selectRow:selected inComponent:0 animated:true];
+    } else {
+        [editButton setEnabled:NO];
+        [deleteButton setEnabled:NO];
     }
     [mutableFetchResults release];
     [request release];
@@ -67,7 +71,13 @@
     NSError *error;
     if (![[appDelegate managedObjectContext] save:&error]) {
         // Handle the error.
+    } else {
+        if ([places count] == 0){
+            [editButton setEnabled:NO];
+            [deleteButton setEnabled:NO];
+        }
     }
+
 }
 
 - (IBAction)edit:(id)sender {
@@ -88,6 +98,7 @@
 - (IBAction)showMap:(id)sender {
     MapViewController *controller = [[MapViewController alloc] initWithNibName:@"MapView" bundle:nil];
 	controller.delegate = self;
+    [controller setPlace:nil];
 	
 	[self presentModalViewController:controller animated:YES];
 	
@@ -107,10 +118,12 @@
         NSError *error;
         if (![[appDelegate managedObjectContext] save:&error]) {
             // Handle the error.
+        } else {
+            [editButton setEnabled:YES];
+            [deleteButton setEnabled:YES];
+            [places addObject:place];
+            [placesPicker reloadAllComponents];
         }
-        
-        [places addObject:place];
-        [placesPicker reloadAllComponents];
     }
 }
 
@@ -130,8 +143,11 @@
         NSError *error;
         if (![[appDelegate managedObjectContext] save:&error]) {
             // Handle the error.
+        } else {
+            [editButton setEnabled:YES];
+            [deleteButton setEnabled:YES];
+            [placesPicker reloadAllComponents];
         }
-        [placesPicker reloadAllComponents];
     }
 }
 

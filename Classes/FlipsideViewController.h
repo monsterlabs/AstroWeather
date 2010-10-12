@@ -18,9 +18,13 @@
 	id <FlipsideViewControllerDelegate> delegate;
     UIPickerView *placesPicker;
     NSMutableArray *places;
+    UIBarButtonItem *editButton;
+    UIBarButtonItem *deleteButton;
 }
 @property (nonatomic, retain) NSMutableArray *places;
 @property (nonatomic, retain) IBOutlet UIPickerView *placesPicker;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *editButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *deleteButton;
 @property (nonatomic, assign) id <FlipsideViewControllerDelegate> delegate;
 - (IBAction)done:(id)sender;
 - (IBAction)edit:(id)sender;
