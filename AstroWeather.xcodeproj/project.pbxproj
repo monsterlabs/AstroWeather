@@ -11,6 +11,12 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		21DAF1861264F65700145583 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21DAF1851264F65700145583 /* MapView.xib */; };
+		21DAF18F1264F69400145583 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DAF18E1264F69400145583 /* MapViewController.m */; };
+		21DAF1931264F6B300145583 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DAF1921264F6B300145583 /* Place.m */; };
+		21DAF1981264F70600145583 /* PlaceAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DAF1971264F70600145583 /* PlaceAnnotation.m */; };
+		21DAF2171264FD1F00145583 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21DAF2161264FD1F00145583 /* MapKit.framework */; };
+		21DAF21F1264FD5600145583 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 21DAF21E1264FD5600145583 /* Icon.png */; };
 		280E754D0DD40C5E005A515E /* FlipsideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E754A0DD40C5E005A515E /* FlipsideView.xib */; };
 		280E754E0DD40C5E005A515E /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E754B0DD40C5E005A515E /* MainView.xib */; };
 		280E754F0DD40C5E005A515E /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E754C0DD40C5E005A515E /* MainWindow.xib */; };
@@ -27,6 +33,15 @@
 		1D3623250D0F684500981E51 /* AstroWeatherAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AstroWeatherAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* AstroWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AstroWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		21DAF1851264F65700145583 /* MapView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapView.xib; sourceTree = "<group>"; };
+		21DAF18D1264F69400145583 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapViewController.h; path = Classes/MapViewController.h; sourceTree = "<group>"; };
+		21DAF18E1264F69400145583 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapViewController.m; path = Classes/MapViewController.m; sourceTree = "<group>"; };
+		21DAF1911264F6B300145583 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Place.h; path = Classes/Place.h; sourceTree = "<group>"; };
+		21DAF1921264F6B300145583 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Place.m; path = Classes/Place.m; sourceTree = "<group>"; };
+		21DAF1961264F70600145583 /* PlaceAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaceAnnotation.h; path = Classes/PlaceAnnotation.h; sourceTree = "<group>"; };
+		21DAF1971264F70600145583 /* PlaceAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaceAnnotation.m; path = Classes/PlaceAnnotation.m; sourceTree = "<group>"; };
+		21DAF2161264FD1F00145583 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		21DAF21E1264FD5600145583 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		280E754A0DD40C5E005A515E /* FlipsideView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FlipsideView.xib; sourceTree = "<group>"; };
 		280E754B0DD40C5E005A515E /* MainView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		280E754C0DD40C5E005A515E /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -51,6 +66,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765590DF743DE002DB57D /* CoreGraphics.framework in Frameworks */,
 				2880DEA310926BF800CC57B2 /* CoreData.framework in Frameworks */,
+				21DAF2171264FD1F00145583 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +91,26 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		21DAF18C1264F67500145583 /* Map View */ = {
+			isa = PBXGroup;
+			children = (
+				21DAF18D1264F69400145583 /* MapViewController.h */,
+				21DAF18E1264F69400145583 /* MapViewController.m */,
+			);
+			name = "Map View";
+			sourceTree = "<group>";
+		};
+		21DAF1901264F6A500145583 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				21DAF1961264F70600145583 /* PlaceAnnotation.h */,
+				21DAF1971264F70600145583 /* PlaceAnnotation.m */,
+				21DAF1911264F6B300145583 /* Place.h */,
+				21DAF1921264F6B300145583 /* Place.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		281C6CD70DB2D82200F60ACC /* Flipside View */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,8 +132,10 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				21DAF1901264F6A500145583 /* Models */,
 				289233A00DB2D0730083E9F9 /* Main View */,
 				281C6CD70DB2D82200F60ACC /* Flipside View */,
+				21DAF18C1264F67500145583 /* Map View */,
 				080E96DDFE201D6D7F000001 /* Application Delegate */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -119,10 +157,12 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				21DAF21E1264FD5600145583 /* Icon.png */,
 				28193032112F806B00ECF9B4 /* AstroWeather.xcdatamodeld */,
 				280E754A0DD40C5E005A515E /* FlipsideView.xib */,
 				280E754B0DD40C5E005A515E /* MainView.xib */,
 				280E754C0DD40C5E005A515E /* MainWindow.xib */,
+				21DAF1851264F65700145583 /* MapView.xib */,
 				8D1107310486CEB800E47090 /* AstroWeather-Info.plist */,
 			);
 			name = Resources;
@@ -135,6 +175,7 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765580DF743DE002DB57D /* CoreGraphics.framework */,
 				2880DEA210926BF800CC57B2 /* CoreData.framework */,
+				21DAF2161264FD1F00145583 /* MapKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -192,6 +233,8 @@
 				280E754D0DD40C5E005A515E /* FlipsideView.xib in Resources */,
 				280E754E0DD40C5E005A515E /* MainView.xib in Resources */,
 				280E754F0DD40C5E005A515E /* MainWindow.xib in Resources */,
+				21DAF1861264F65700145583 /* MapView.xib in Resources */,
+				21DAF21F1264FD5600145583 /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +250,9 @@
 				289233AE0DB2D0DB0083E9F9 /* MainViewController.m in Sources */,
 				289233B00DB2D0DB0083E9F9 /* FlipsideViewController.m in Sources */,
 				28193033112F806B00ECF9B4 /* AstroWeather.xcdatamodeld in Sources */,
+				21DAF18F1264F69400145583 /* MapViewController.m in Sources */,
+				21DAF1931264F6B300145583 /* Place.m in Sources */,
+				21DAF1981264F70600145583 /* PlaceAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

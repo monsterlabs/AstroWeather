@@ -2,11 +2,12 @@
 //  AstroWeatherAppDelegate.m
 //  AstroWeather
 //
-//  Created by Juan Germán Castañeda Echevarría on 10/12/10.
-//  Copyright 2010 UNAM. All rights reserved.
+//  Created by Juan Germán Castañeda Echevarría on 10/10/10.
+//  Copyright (c) 2010 UNAM. All rights reserved.
 //
 
 #import "AstroWeatherAppDelegate.h"
+
 #import "MainViewController.h"
 
 @implementation AstroWeatherAppDelegate
@@ -15,72 +16,21 @@
 @synthesize window;
 @synthesize mainViewController;
 
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-#pragma mark -
-#pragma mark Application lifecycle
-
-- (void)awakeFromNib {    
-    
-	mainViewController.managedObjectContext = self.managedObjectContext;    
-}
-
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-    
-    // Override point for customization after application launch.  
-    
+    // Override point for customization after application launch.
     // Add the main view controller's view to the window and display.
     [window addSubview:mainViewController.view];
     [window makeKeyAndVisible];
-
     return YES;
 }
 
-
-- (void)applicationWillResignActive:(UIApplication *)application {
-    /*
-     Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-     Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-     */
-}
-
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    /*
-     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-     If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
-     */
-    [self saveContext];
-}
-
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    /*
-     Called as part of the transition from the background to the inactive state: here you can undo many of the changes made on entering the background.
-     */
-}
-
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-     */
-}
-
-
-/**
- applicationWillTerminate: saves changes in the application's managed object context before the application terminates.
- */
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [self saveContext];
-}
 
-
-- (void)saveContext {
-    
+    // Saves changes in the application's managed object context before the application terminates.
     NSError *error = nil;
-    if (managedObjectContext_ != nil) {
-        if ([managedObjectContext_ hasChanges] && ![managedObjectContext_ save:&error]) {
+    if (managedObjectContext) {
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
             /*
              Replace this implementation with code to handle the error appropriately.
              
@@ -90,92 +40,80 @@
             abort();
         } 
     }
-}    
+}
 
+- (void)dealloc {
 
-#pragma mark -
-#pragma mark Core Data stack
+    [window release];
+    [managedObjectContext release];
+    [managedObjectModel release];
+    [persistentStoreCoordinator release];
+    [mainViewController release];
+    [super dealloc];
+}
 
 /**
  Returns the managed object context for the application.
  If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
  */
-- (NSManagedObjectContext *) managedObjectContext {
-	
-    if (managedObjectContext_ != nil) {
-        return managedObjectContext_;
+- (NSManagedObjectContext *)managedObjectContext {
+    
+    if (managedObjectContext) {
+        return managedObjectContext;
     }
-	
+    
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator != nil) {
-        managedObjectContext_ = [[NSManagedObjectContext alloc] init];
-        [managedObjectContext_ setPersistentStoreCoordinator:coordinator];
+    if (coordinator) {
+        managedObjectContext = [[NSManagedObjectContext alloc] init];
+        [managedObjectContext setPersistentStoreCoordinator:coordinator];
     }
-    return managedObjectContext_;
+    return managedObjectContext;
 }
-
 
 /**
  Returns the managed object model for the application.
- If the model doesn't already exist, it is created from the application's model.
+ If the model doesn't already exist, it is created by merging all of the models found in the application bundle.
  */
 - (NSManagedObjectModel *)managedObjectModel {
     
-    if (managedObjectModel_ != nil) {
-        return managedObjectModel_;
+    if (managedObjectModel) {
+        return managedObjectModel;
     }
-    NSString *modelPath = [[NSBundle mainBundle] pathForResource:@"AstroWeather" ofType:@"momd"];
-    NSURL *modelURL = [NSURL fileURLWithPath:modelPath];
-    managedObjectModel_ = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];    
-    return managedObjectModel_;
+    managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:nil] retain];    
+    return managedObjectModel;
 }
-
 
 /**
  Returns the persistent store coordinator for the application.
  If the coordinator doesn't already exist, it is created and the application's store added to it.
  */
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-	
-    if (persistentStoreCoordinator_ != nil) {
-        return persistentStoreCoordinator_;
+    
+    if (persistentStoreCoordinator) {
+        return persistentStoreCoordinator;
     }
-	
-    NSURL *storeUrl = [NSURL fileURLWithPath: [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"AstroWeather.sqlite"]];
-	
-	NSError *error = nil;
-    persistentStoreCoordinator_ = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![persistentStoreCoordinator_ addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error]) {
+    
+    NSURL *storeUrl = [NSURL fileURLWithPath:[[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"AstroWeather.sqlite"]];
+    
+    NSError *error = nil;
+    persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error]) {
         /*
          Replace this implementation with code to handle the error appropriately.
          
          abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
          
          Typical reasons for an error here include:
-         * The persistent store is not accessible;
-         * The schema for the persistent store is incompatible with current managed object model.
+         * The persistent store is not accessible
+         * The schema for the persistent store is incompatible with current managed object model
          Check the error message to determine what the actual problem was.
-         
-         
-         If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is pointing into the application's resources directory instead of a writeable directory.
-         
-         If you encounter schema incompatibility errors during development, you can reduce their frequency by:
-         * Simply deleting the existing store:
-         [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil]
-         
-         * Performing automatic lightweight migration by passing the following dictionary as the options parameter: 
-         [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
-         
-         Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
-         
          */
-		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-		abort();
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
     }    
-	
-    return persistentStoreCoordinator_;
+    
+    return persistentStoreCoordinator;
 }
-
 
 #pragma mark -
 #pragma mark Application's Documents directory
@@ -184,29 +122,7 @@
  Returns the path to the application's Documents directory.
  */
 - (NSString *)applicationDocumentsDirectory {
-	return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-}
-
-
-#pragma mark -
-#pragma mark Memory management
-
-- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
-    /*
-     Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
-     */
-}
-
-
-- (void)dealloc {
-	
-    [managedObjectContext_ release];
-    [managedObjectModel_ release];
-    [persistentStoreCoordinator_ release];
-    
-    [mainViewController release];
-    [window release];
-    [super dealloc];
+    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
 
 @end
