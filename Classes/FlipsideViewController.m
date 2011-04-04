@@ -53,7 +53,6 @@
     NSInteger selectedIdx = [placesPicker selectedRowInComponent:0];
     Place *place = nil;
     if (selectedIdx >= 0 && [places count] > 0) {
-        NSLog(@"%i", selectedIdx);
         place = [places objectAtIndex:selectedIdx];
         [[NSUserDefaults standardUserDefaults] setInteger:selectedIdx forKey:@"Selected"];
     }
@@ -90,7 +89,6 @@
             [deleteButton setEnabled:NO];
         }
         selectedIdx = [placesPicker selectedRowInComponent:0];
-        NSLog(@"%i", selectedIdx);
         [[NSUserDefaults standardUserDefaults] setInteger:selectedIdx forKey:@"Selected"];
     }
 }
