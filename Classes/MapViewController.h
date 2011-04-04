@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "PlaceAnnotation.h"
+#import <CoreLocation/CLLocation.h>
 
 @protocol MapViewControllerDelegate;
 
-@interface MapViewController : UIViewController <UITextFieldDelegate> {
+@interface MapViewController : UIViewController <UITextFieldDelegate,MKMapViewDelegate> {
     id <MapViewControllerDelegate> delegate;
     MKMapView *mapView;
     PlaceAnnotation *place;
@@ -26,6 +27,7 @@
 @property (nonatomic, assign) bool editMode;
 
 - (IBAction)done:(id)sender;
+- (IBAction)cancel:(id)sender;
 
 @end
 

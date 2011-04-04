@@ -17,6 +17,9 @@
 		21DAF1981264F70600145583 /* PlaceAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 21DAF1971264F70600145583 /* PlaceAnnotation.m */; };
 		21DAF2171264FD1F00145583 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21DAF2161264FD1F00145583 /* MapKit.framework */; };
 		21DAF21F1264FD5600145583 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 21DAF21E1264FD5600145583 /* Icon.png */; };
+		21DAF2A41265090900145583 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21DAF2A31265090900145583 /* iAd.framework */; };
+		21F061CF13495ECF00EB9C54 /* astropanel.png in Resources */ = {isa = PBXBuildFile; fileRef = 21F061CE13495ECF00EB9C54 /* astropanel.png */; };
+		21F061D11349658200EB9C54 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 21F061D01349658200EB9C54 /* close.png */; };
 		280E754D0DD40C5E005A515E /* FlipsideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E754A0DD40C5E005A515E /* FlipsideView.xib */; };
 		280E754E0DD40C5E005A515E /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E754B0DD40C5E005A515E /* MainView.xib */; };
 		280E754F0DD40C5E005A515E /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E754C0DD40C5E005A515E /* MainWindow.xib */; };
@@ -42,6 +45,9 @@
 		21DAF1971264F70600145583 /* PlaceAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaceAnnotation.m; path = Classes/PlaceAnnotation.m; sourceTree = "<group>"; };
 		21DAF2161264FD1F00145583 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		21DAF21E1264FD5600145583 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		21DAF2A31265090900145583 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		21F061CE13495ECF00EB9C54 /* astropanel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = astropanel.png; sourceTree = "<group>"; };
+		21F061D01349658200EB9C54 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		280E754A0DD40C5E005A515E /* FlipsideView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FlipsideView.xib; sourceTree = "<group>"; };
 		280E754B0DD40C5E005A515E /* MainView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		280E754C0DD40C5E005A515E /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -67,6 +73,7 @@
 				288765590DF743DE002DB57D /* CoreGraphics.framework in Frameworks */,
 				2880DEA310926BF800CC57B2 /* CoreData.framework in Frameworks */,
 				21DAF2171264FD1F00145583 /* MapKit.framework in Frameworks */,
+				21DAF2A41265090900145583 /* iAd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +164,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				21F061D01349658200EB9C54 /* close.png */,
+				21F061CE13495ECF00EB9C54 /* astropanel.png */,
 				21DAF21E1264FD5600145583 /* Icon.png */,
 				28193032112F806B00ECF9B4 /* AstroWeather.xcdatamodeld */,
 				280E754A0DD40C5E005A515E /* FlipsideView.xib */,
@@ -176,6 +185,7 @@
 				288765580DF743DE002DB57D /* CoreGraphics.framework */,
 				2880DEA210926BF800CC57B2 /* CoreData.framework */,
 				21DAF2161264FD1F00145583 /* MapKit.framework */,
+				21DAF2A31265090900145583 /* iAd.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -238,6 +248,8 @@
 				280E754F0DD40C5E005A515E /* MainWindow.xib in Resources */,
 				21DAF1861264F65700145583 /* MapView.xib in Resources */,
 				21DAF21F1264FD5600145583 /* Icon.png in Resources */,
+				21F061CF13495ECF00EB9C54 /* astropanel.png in Resources */,
+				21F061D11349658200EB9C54 /* close.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +285,7 @@
 				GCC_PREFIX_HEADER = AstroWeather_Prefix.pch;
 				INFOPLIST_FILE = "AstroWeather-Info.plist";
 				PRODUCT_NAME = AstroWeather;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -285,6 +298,7 @@
 				GCC_PREFIX_HEADER = AstroWeather_Prefix.pch;
 				INFOPLIST_FILE = "AstroWeather-Info.plist";
 				PRODUCT_NAME = AstroWeather;
+				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -297,6 +311,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -313,6 +328,7 @@
 				GCC_PREFIX_HEADER = AstroWeather_Prefix.pch;
 				INFOPLIST_FILE = "AstroWeather-Info.plist";
 				PRODUCT_NAME = AstroWeather;
+				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Distribution;
@@ -325,6 +341,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
 				PREBINDING = NO;
 				SDKROOT = iphoneos4.1;
 			};
@@ -338,6 +355,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
 				SDKROOT = iphoneos4.1;

@@ -50,9 +50,10 @@
 
 
 - (IBAction)done:(id)sender {
-    NSUInteger selectedIdx = [placesPicker selectedRowInComponent:0];
+    NSInteger selectedIdx = [placesPicker selectedRowInComponent:0];
     Place *place = nil;
     if (selectedIdx >= 0 && [places count] > 0) {
+        NSLog(@"%i", selectedIdx);
         place = [places objectAtIndex:selectedIdx];
         [[NSUserDefaults standardUserDefaults] setInteger:selectedIdx forKey:@"Selected"];
     }
@@ -60,6 +61,18 @@
 }
 
 - (IBAction)delete:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@""
+                                                             delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles:nil];
+    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+    [actionSheet showInView:self.view];
+    [actionSheet release];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex != 0) {
+        return;
+    }
+    // Proceed to delete
     NSUInteger selectedIdx = [placesPicker selectedRowInComponent:0];
     NSManagedObject *placeToDelete = [places objectAtIndex:selectedIdx];
     [[appDelegate managedObjectContext] deleteObject:placeToDelete];
@@ -76,8 +89,10 @@
             [editButton setEnabled:NO];
             [deleteButton setEnabled:NO];
         }
+        selectedIdx = [placesPicker selectedRowInComponent:0];
+        NSLog(@"%i", selectedIdx);
+        [[NSUserDefaults standardUserDefaults] setInteger:selectedIdx forKey:@"Selected"];
     }
-
 }
 
 - (IBAction)edit:(id)sender {
@@ -86,8 +101,10 @@
     
     NSUInteger selectedIdx = [placesPicker selectedRowInComponent:0];
     Place *placeToEdit = [places objectAtIndex:selectedIdx];
+    PlaceAnnotation *annotation = [[PlaceAnnotation alloc] initWithPlace:placeToEdit];
     
-    [controller setPlace: [[PlaceAnnotation alloc] initWithPlace:placeToEdit]];
+    [controller setPlace: annotation];
+    [annotation release];
     controller.editMode = YES;
 	
 	[self presentModalViewController:controller animated:YES];

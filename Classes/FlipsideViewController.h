@@ -14,7 +14,7 @@
 @protocol FlipsideViewControllerDelegate;
 
 
-@interface FlipsideViewController : UIViewController <MapViewControllerDelegate,UIPickerViewDelegate, UIPickerViewDataSource>{
+@interface FlipsideViewController : UIViewController <MapViewControllerDelegate,UIPickerViewDelegate, UIPickerViewDataSource,UIActionSheetDelegate>{
 	id <FlipsideViewControllerDelegate> delegate;
     UIPickerView *placesPicker;
     NSMutableArray *places;

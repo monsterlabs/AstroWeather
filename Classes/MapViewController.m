@@ -16,21 +16,12 @@
 @synthesize place;
 @synthesize editMode;
 @synthesize textField;
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc]
                                           initWithTarget:self action:@selector(handleLongPressGesture:)];
+    
     [[self mapView] addGestureRecognizer:longPressGesture];
     [longPressGesture release];
     if (place != nil) {
@@ -38,8 +29,10 @@
         [[self mapView] addAnnotation:place];
         [[self mapView] setCenterCoordinate:[place coordinate]];
     } else {
-        [textField setEnabled:NO];
+        //[textField setEnabled:NO];
         CLLocationCoordinate2D center;
+        center.latitude = 0;
+        center.longitude = 0;
         [[self mapView] setCenterCoordinate:center];
     }
 
@@ -49,9 +42,35 @@
 - (IBAction)done:(id)sender {
     if (editMode) {
         [self.delegate mapViewControllerDidFinishEditing:self place:[place autorelease]];
+        place.title = [textField text];
     } else {
-        [self.delegate mapViewControllerDidFinish:self withPlace:[place autorelease]];	
+        if (place == nil) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Place Missing"
+                                                            message:@"Please select a place in the map before saving."
+                                                           delegate:nil 
+                                                  cancelButtonTitle:@"OK" 
+                                                  otherButtonTitles:nil];
+            [alert show];   
+            [alert release];
+            return;
+        }
+        if ([[textField text] length] == 0) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Name Missing"
+                                                            message:@"Please provide a name for the place before saving." 
+                                                           delegate:nil 
+                                                  cancelButtonTitle:@"OK" 
+                                                  otherButtonTitles:nil];
+            [alert show];   
+            [alert release];
+            return;
+        }
+        place.title = [textField text];        
+        [self.delegate mapViewControllerDidFinish:self withPlace:[place autorelease]];
     }
+}
+
+- (IBAction)cancel:(id)sender {
+    [self.delegate mapViewControllerDidFinish:self withPlace:nil];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
@@ -64,28 +83,40 @@
 
 - (IBAction)handleLongPressGesture:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
-        CGPoint longPressPoint = [sender locationInView:mapView];
-        CLLocationCoordinate2D coordinate = [mapView convertPoint:longPressPoint toCoordinateFromView:mapView];
+        CGPoint pressPoint = [sender locationInView:mapView];
+        CLLocationCoordinate2D coordinate = [mapView convertPoint:pressPoint toCoordinateFromView:mapView];
         
         if (place != nil) {
             [[self mapView] removeAnnotation:place];
         }
         
         place = [[PlaceAnnotation alloc] initWithCoordinate:coordinate title:@"Name"];
-        [textField setEnabled:YES];
         
         [[self mapView] addAnnotation:place];
     }
 }
 
+- (MKAnnotationView *)mapView:(MKMapView *)amapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    static NSString *AnnotationViewID = @"placeAnnotationViewID";
+    
+    MKPinAnnotationView *annotationView = 
+        (MKPinAnnotationView *)[amapView dequeueReusableAnnotationViewWithIdentifier:AnnotationViewID];
+    if (annotationView == nil) {
+        annotationView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID] autorelease];
+    }
+    
+    annotationView.annotation = annotation;
+    annotationView.draggable = YES;
+    
+    return annotationView;
+}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	// Return YES for supported orientations.
 	return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
