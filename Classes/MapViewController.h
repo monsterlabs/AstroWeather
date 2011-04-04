@@ -28,6 +28,7 @@
 
 - (IBAction)done:(id)sender;
 - (IBAction)cancel:(id)sender;
+- (IBAction)help:(id)sender;
 
 @end
 

@@ -69,6 +69,17 @@
     }
 }
 
+- (IBAction)help:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Help"
+                                                    message:@"Tap and hold to select a location.\n\nYou must give the location a name before saving it." 
+                                                   delegate:nil 
+                                          cancelButtonTitle:@"OK" 
+                                          otherButtonTitles:nil];
+    [alert show];   
+    [alert release];
+
+}
+
 - (IBAction)cancel:(id)sender {
     [self.delegate mapViewControllerDidFinish:self withPlace:nil];
 }
